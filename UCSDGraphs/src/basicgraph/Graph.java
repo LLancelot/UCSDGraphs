@@ -2,6 +2,7 @@ package basicgraph;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -122,7 +123,12 @@ public abstract class Graph {
 	 */
 	public List<Integer> degreeSequence() {
 		// XXX: Implement in part 1 of week 2
-		return null;
+		List<Integer> degreeSeq = new ArrayList<Integer>();
+		for (int v = 0; v < getNumVertices(); v++) {
+			degreeSeq.add(getInNeighbors(v).size() + getNeighbors(v).size());
+		}
+		Collections.sort(degreeSeq, Comparator.reverseOrder()); // largest to smallest
+		return degreeSeq;
 	}
 	
 	/**
@@ -248,6 +254,11 @@ public abstract class Graph {
 		System.out.println("****");
 
 		System.out.println("\n****");
+		
+		// test modified map data
+//		GraphAdjList graphFromFile2 = new GraphAdjList();
+//		GraphLoader.loadRoadMap("data/testdata/simpletest_modified.map", graphFromFile2);
+//		System.out.println(graphFromFile2);
 		
 		// You can test with real road data here.  Use the data files in data/maps
 		
