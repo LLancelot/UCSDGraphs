@@ -7,10 +7,20 @@
  */
 package roadgraph;
 
-
+import java.util.ArrayDeque;
+import java.util.ArrayList;
+import java.util.Deque;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
+import java.util.PriorityQueue;
+import java.util.Queue;
 import java.util.Set;
 import java.util.function.Consumer;
+
+import com.sun.org.apache.xpath.internal.axes.NodeSequence;
 
 import geography.GeographicPoint;
 import util.GraphLoader;
@@ -25,13 +35,16 @@ import util.GraphLoader;
 public class MapGraph {
 	//TODO: Add your member variables here in WEEK 3
 	
-	
+	private HashMap<GeographicPoint, MapNode> graph;
+	private HashSet<MapEdge> edgeList;
 	/** 
 	 * Create a new empty MapGraph 
 	 */
 	public MapGraph()
 	{
 		// TODO: Implement in this constructor in WEEK 3
+		graph = new HashMap<>();
+		edgeList = new HashSet<>();
 	}
 	
 	/**
@@ -41,7 +54,7 @@ public class MapGraph {
 	public int getNumVertices()
 	{
 		//TODO: Implement this method in WEEK 3
-		return 0;
+		return graph.values().size();
 	}
 	
 	/**
@@ -51,7 +64,7 @@ public class MapGraph {
 	public Set<GeographicPoint> getVertices()
 	{
 		//TODO: Implement this method in WEEK 3
-		return null;
+		return graph.keySet();
 	}
 	
 	/**
@@ -61,7 +74,7 @@ public class MapGraph {
 	public int getNumEdges()
 	{
 		//TODO: Implement this method in WEEK 3
-		return 0;
+		return edgeList.size();
 	}
 
 	
@@ -76,7 +89,13 @@ public class MapGraph {
 	public boolean addVertex(GeographicPoint location)
 	{
 		// TODO: Implement this method in WEEK 3
-		return false;
+		if (graph.containsKey(location)) {
+			return false;
+		}
+		else {
+			graph.put(location, new MapNode(location));
+			return true;
+		}
 	}
 	
 	/**
@@ -95,7 +114,11 @@ public class MapGraph {
 			String roadType, double length) throws IllegalArgumentException {
 
 		//TODO: Implement this method in WEEK 3
-		
+		if (length <= 0)	throw new IllegalArgumentException();
+		if (graph.get(from) == null || graph.get(to) == null)
+			throw new IllegalArgumentException();
+		graph.get(from).addEdge(to, roadName, roadType, length);
+		edgeList.add(new MapEdge(from, to, roadName, roadType, length));
 	}
 	
 
@@ -125,12 +148,60 @@ public class MapGraph {
 	{
 		// TODO: Implement this method in WEEK 3
 		
+		if (start == null || goal == null) {
+			throw new IllegalArgumentException();
+		}
+		HashMap<MapNode, MapNode> map = new HashMap<>();
+		PriorityQueue<MapNode> toBeVisited = new PriorityQueue<>();
+		HashSet<MapNode> visited = new HashSet<>();
+		MapNode startNode = graph.get(start), goalNode = graph.get(goal);
+		MapNode currNode = null, tempNode = null;
+		if (startNode == null || goalNode == null) {
+			System.out.println("Null point for start or goal, please check!");
+			return null;
+		}
+		
+		toBeVisited.add(startNode);
+		nodeSearched.accept(startNode.getLocation());
+		while (!toBeVisited.isEmpty()) {
+			currNode = toBeVisited.remove();
+			nodeSearched.accept(currNode.getLocation());
+			if (currNode.equals(goalNode)) {
+				// find goalNode.
+				break;
+			}
+			for (MapEdge e : currNode.getEdgeList()) {
+				tempNode = graph.get(e.getTo());
+				if (!visited.contains(tempNode)) {
+					visited.add(tempNode);
+					toBeVisited.add(tempNode);
+					map.put(tempNode, currNode);
+				}
+			}
+		}
+		
+		// finally, check if matched
+		if (!currNode.equals(goalNode)) {
+			// no path
+			return null;
+		}
 		// Hook for visualization.  See writeup.
 		//nodeSearched.accept(next.getLocation());
-
-		return null;
+		return buildPath(map, goalNode, startNode);
 	}
 	
+	private List<GeographicPoint> buildPath(HashMap<MapNode,MapNode> map, MapNode goal, MapNode start) {
+		//
+		List<GeographicPoint> route = new LinkedList<>();
+		MapNode currNode = goal;
+		while (!currNode.equals(start)) {
+			// type convert
+			((LinkedList<GeographicPoint>) route).addFirst(currNode.getLocation());
+			currNode = map.get(currNode);
+		}
+		((LinkedList<GeographicPoint>) route).addFirst(start.getLocation());
+		return route;
+	}
 
 	/** Find the path from start to goal using Dijkstra's algorithm
 	 * 
