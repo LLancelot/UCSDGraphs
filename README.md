@@ -4,14 +4,18 @@ _Coursera course: Advanced Data Structure in Java_
 
 [https://www.coursera.org/learn/advanced-data-structures](https://www.coursera.org/learn/advanced-data-structures)
 
-#### My Course Certificate
+### My Course Certificate
 
 ![View certificate for Duan Lin, Advanced Data Structures in Java, an online non-credit course authorized by University of California San Diego and offered through Coursera](https://coursera-certificate-images.s3.amazonaws.com/XPTDYF2AA6SP)
 
 > Below are the files introduced in each week and used in each week
 > of the course. See file for description...
 
-#### Week 1 & 2 : Introduction to the course and graphs
+### Orientation:
+
+Before you get started, please refer to this article: [Orientation to the Starter Code, Data Files and Front-end](https://github.com/LLancelot/UCSDGraphs/blob/master/Orientation%20to%20the%20Starter%20Code%2C%20Data%20Files%20and%20Front-end.md#orientation-to-the-starter-code-data-files-and-front-end)
+
+### Week 1 & 2 : Introduction to the course and graphs
 
 - ```basicgraph.Graph.java```
 
@@ -19,7 +23,7 @@ _Coursera course: Advanced Data Structure in Java_
 
 - ```basicgraph.GraphAdjMatrix.java```
 
-#### Week 3 : Class design and simple graph search
+### Week 3 : Class design and simple graph search
 
 - ```roadgraph.MapGraph.java``` (Implemented methods in this file and run it on searchGrader.java for testing)
 
@@ -29,13 +33,13 @@ _Coursera course: Advanced Data Structure in Java_
 
 - ```week2example.MazeNode.java```
 
-#### Week 4 : Finding shortest paths in weighted graphs
+### Week 4 : Finding shortest paths in weighted graphs
 
 - ```roadgraph.MapGraph.java``` (Implemented Dijkstra's algorithm and A* search)
 - ```roadgraph.MapNode.java``` (Modified some variables)
 - ```roadgraph.MapEdge.java```
 
-#### Week 5: Route planning and NP-hard graph problems
+### Week 5: Route planning and NP-hard graph problems
 
 - Produce the solution to the TSP for a given graph.
 - Analyze whether an algorithm optimally solves the TSP
@@ -44,14 +48,14 @@ _Coursera course: Advanced Data Structure in Java_
 - Differentiate between Hamiltonian and Eulerian graphs.
 - Describe how a heuristic solution compares to an optimal solution
 
-#### Week 6: End of Course Project Extension
+### Week 6: End of Course Project Extension
 
 - Design an extension to your project.
 - Develop your extension to your project.
 
 ----------------------
 
-#### Utility files
+### Utility files
 
 - ```geography.GeographicPoint.java```
 
@@ -59,7 +63,7 @@ _Coursera course: Advanced Data Structure in Java_
 
 - ```util.GraphLoader.java```
 
-#### Importing Project into eclipse:
+### Importing Project into eclipse:
 
 	1. Create a new Java Project in your workspace
 	2. Import the starter files:
