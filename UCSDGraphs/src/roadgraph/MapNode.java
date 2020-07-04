@@ -8,8 +8,8 @@ import geography.GeographicPoint;
 
 public class MapNode implements Comparable<MapNode>{
 	private GeographicPoint location;
-
-	private double length = 0;
+	private double length = 0;	
+	private double predictedLength = 0;	
 	private HashSet<MapEdge> edgeList;
 	
 	public MapNode(GeographicPoint location) {
@@ -59,7 +59,12 @@ public class MapNode implements Comparable<MapNode>{
 		this.length = length;
 	}
 	
+	public double getPredictedLength() {
+		return predictedLength;
+	}
 
-
+	public void setPredictedLength(double predictedLength) {
+		this.predictedLength = predictedLength;
+	}
 
 }

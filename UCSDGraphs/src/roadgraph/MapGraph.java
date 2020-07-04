@@ -37,6 +37,7 @@ public class MapGraph {
 	
 	private HashMap<GeographicPoint, MapNode> graph;
 	private HashSet<MapEdge> edgeList;
+	private HashMap<MapNode, Double> distanceTo;
 	/** 
 	 * Create a new empty MapGraph 
 	 */
@@ -232,10 +233,55 @@ public class MapGraph {
 
 		// Hook for visualization.  See writeup.
 		//nodeSearched.accept(next.getLocation());
+		PriorityQueue<MapNode> pri_queue = new PriorityQueue<>();
+		HashSet<MapNode> visited = new HashSet<>();
+		HashMap<MapNode, MapNode> parentMap = new HashMap<>();
+//		double distance = Integer.MAX_VALUE;	// initialize distance to positive infinity
+		initLengthInfinite();
+		
+		MapNode current = null;
+		MapNode temp = null;
+		MapNode startNode = graph.get(start);
+		MapNode goalNode = graph.get(goal);
+		startNode.setLength(0);
+		pri_queue.add(startNode);
+		
+		// while loop 
+		while (!pri_queue.isEmpty()) {
+			current = pri_queue.remove();
+			if (!visited.contains(current)) {
+				visited.add(current);
+				// check if reach goal
+				if (current.equals(goalNode)) {
+					return buildPath(parentMap, goalNode, startNode);
+				}
+				for (MapEdge n : current.getEdgeList()) {
+					temp = graph.get(n.getTo());
+					if (!visited.contains(temp)) {
+						// check if path: current -> n is shorter?
+						if (temp.getLength() > (n.getDistance() + current.getLength())) {
+							temp.setLength(n.getDistance() + current.getLength());
+							parentMap.put(temp, current);
+							pri_queue.add(temp);
+						}
+					}
+				}
+			}
+		}
+		
+		// end while loop, means no path: start -> goal exists
 		
 		return null;
 	}
 
+	private void initLengthInfinite() {
+		MapNode temp = null;
+		for (GeographicPoint n : graph.keySet()) {
+			graph.get(n).setLength(Integer.MAX_VALUE);
+			graph.get(n).setPredictedLength(Integer.MAX_VALUE);
+		}
+	}
+	
 	/** Find the path from start to goal using A-Star search
 	 * 
 	 * @param start The starting location
@@ -265,10 +311,55 @@ public class MapGraph {
 		// Hook for visualization.  See writeup.
 		//nodeSearched.accept(next.getLocation());
 		
+		PriorityQueue<MapNode> pri_queue = new PriorityQueue<>();
+		HashSet<MapNode> visited = new HashSet<>();
+		HashMap<MapNode, MapNode> parentMap = new HashMap<>();
+		double distance = Integer.MAX_VALUE;	// initialize distance to positive infinity
+		initLengthInfinite();
+		
+		MapNode current = null;
+		MapNode temp = null;
+		MapNode startNode = graph.get(start);
+		MapNode goalNode = graph.get(goal);
+		startNode.setLength(0);
+		pri_queue.add(startNode);
+		
+		// while loop 
+		while (!pri_queue.isEmpty()) {
+			current = pri_queue.remove();
+			if (!visited.contains(current)) {
+				visited.add(current);
+				// check if reach goal
+				if (current.equals(goalNode)) {
+					return buildPath(parentMap, goalNode, startNode);
+				}
+				for (MapEdge n : current.getEdgeList()) {
+					temp = graph.get(n.getTo());
+					if (!visited.contains(temp)) {
+						// check if path: current -> n is shorter?
+						distance = predictLength(temp, goalNode);
+						if (temp.getLength() > (n.getDistance() + current.getLength() + distance)) {
+							temp.setLength(n.getDistance() + current.getLength() + distance);
+							parentMap.put(temp, current);
+							pri_queue.add(temp);
+						}
+					}
+				}
+			}
+		}
+		
+		// end while loop, means no path: start -> goal exists
+		
 		return null;
 	}
 
-	
+	private double predictLength(MapNode start, MapNode goal) {
+		double dist = 0;
+		GeographicPoint startLocation = start.getLocation();
+		GeographicPoint endLocation = goal.getLocation();
+		dist = Math.abs(startLocation.distance(endLocation));
+		return dist;
+	}
 	
 	public static void main(String[] args)
 	{
