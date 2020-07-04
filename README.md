@@ -4,6 +4,10 @@ _Coursera course: Advanced Data Structure in Java_
 
 [https://www.coursera.org/learn/advanced-data-structures](https://www.coursera.org/learn/advanced-data-structures)
 
+#### My Course Certificate
+
+![View certificate for Duan Lin, Advanced Data Structures in Java, an online non-credit course authorized by University of California San Diego and offered through Coursera](https://coursera-certificate-images.s3.amazonaws.com/XPTDYF2AA6SP)
+
 > Below are the files introduced in each week and used in each week
 > of the course. See file for description...
 
@@ -17,7 +21,7 @@ _Coursera course: Advanced Data Structure in Java_
 
 #### Week 3 : Class design and simple graph search
 
-- ```roadgraph.MapGraph.java```
+- ```roadgraph.MapGraph.java``` (Implemented methods in this file and run it on searchGrader.java for testing)
 
 - ```week2example.Maze.java```
 
@@ -26,6 +30,24 @@ _Coursera course: Advanced Data Structure in Java_
 - ```week2example.MazeNode.java```
 
 #### Week 4 : Finding shortest paths in weighted graphs
+
+- ```roadgraph.MapGraph.java``` (Implemented Dijkstra's algorithm and A* search)
+- ```roadgraph.MapNode.java``` (Modified some variables)
+- ```roadgraph.MapEdge.java```
+
+#### Week 5: Route planning and NP-hard graph problems
+
+- Produce the solution to the TSP for a given graph.
+- Analyze whether an algorithm optimally solves the TSP
+- Analyze the running time for TSP algorithms
+- Explain the notion of an NP-Hard problem
+- Differentiate between Hamiltonian and Eulerian graphs.
+- Describe how a heuristic solution compares to an optimal solution
+
+#### Week 6: End of Course Project Extension
+
+- Design an extension to your project.
+- Develop your extension to your project.
 
 ----------------------
 
