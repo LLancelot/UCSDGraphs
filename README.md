@@ -6,7 +6,7 @@ _Coursera course: Advanced Data Structure in Java_
 
 ### My Course Certificate
 
-![View certificate for Duan Lin, Advanced Data Structures in Java, an online non-credit course authorized by University of California San Diego and offered through Coursera](https://coursera-certificate-images.s3.amazonaws.com/XPTDYF2AA6SP)
+https://coursera.org/share/dc4cecd3036ddbac342ca89a82c0f27b
 
 > Below are the files introduced in each week and used in each week
 > of the course. See file for description...
