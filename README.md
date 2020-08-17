@@ -6,7 +6,7 @@ _Coursera course: Advanced Data Structure in Java_
 
 ### My Course Certificate
 
-https://coursera.org/share/dc4cecd3036ddbac342ca89a82c0f27b
+![XPTDYF2AA6SP.jpg](https://github.com/LLancelot/UCSDGraphs/blob/master/XPTDYF2AA6SP.jpg?raw=true)
 
 > Below are the files introduced in each week and used in each week
 > of the course. See file for description...
